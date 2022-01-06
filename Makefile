@@ -41,10 +41,10 @@ lint:
 deploy:
 	black src
 	isort src
-	pipreqs
-	git add src
+	pipreqs --force
+	git add . 
 	@read -p "Enter commit message: " message; \
-	git commit -m $$message
+	git commit -m "$$message"
 	git push
 
 
