@@ -71,6 +71,8 @@ Goal of this week is to setup the project. This includes: Setting up the makefil
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 
+## Cites and references
+[Movie name generation with GPT-2](https://www.nbshare.io/notebook/976197999/Movie-Name-Generation-Using-GPT-2/)
 
 --------
 <p><small>DTU Course 02476 - Machine Learning Operations</small></><br>
