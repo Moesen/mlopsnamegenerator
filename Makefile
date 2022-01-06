@@ -24,6 +24,8 @@ endif
 requirements: test_environment
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
+
+devrequirements: requirements
 	$(PYTHON_INTERPRETER) -m pip install isort==5.10.1 pipreqs==0.4.11
 
 ## Make Dataset
@@ -46,6 +48,7 @@ deploy:
 	git add . 
 	@read -p "Enter commit message: " message; \
 	git commit -m "$$message"
+	git pull
 	git push
 
 
