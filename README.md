@@ -1,10 +1,30 @@
-MLOpsNameGenerator
-==============================
+# MLOpsNameGenerator
+## Overall Goal
+The goal of the project is to develop a model that is capable of creating Pokémon names based on its description, using principles orginization and version control, reproduceability, etc.
 
-Generating new names based on trends in data using GPT2 (Transformer network)
+## Framework
+The framework we use is [**Transformer**](https://github.com/huggingface/transformers). We intend to use the Natural Language Processing (NLP) part of the framework. The model we are going to use is [GPT-2](https://huggingface.co/gpt2?text=A+long+time+ago%2C+) doing finetuning over it so we can specialize it over our precise problem.
 
-Project Organization
-------------
+## Data
+Initially, we pretend to use the description of each Pokémon using the [PokéAPI](https://pokeapi.co/), which is a RESTful API linked to a database of 
+
+
+## RoadMap
+### Week 1
+Goal of this week is to setup the project. This includes: Setting up the makefile, setting up the first model and a script for training the model, fetching the data required to train the models, setup hydra to test with hyperparameters and setup docker for containerisation.
+
+|Alba|Alejandro|Gustav|
+|-|-|-|
+|t|t|t|
+
+### Week 2
+
+
+### Week3
+
+
+## Project Organization
+
 
     ├── LICENSE
     ├── Makefile           <- Makefile with commands like `make data` or `make train`
@@ -53,5 +73,5 @@ Project Organization
 
 
 --------
-
+<p><small>DTU Course 02476 - Machine Learning Operations</small></><br>
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>

@@ -45,6 +45,7 @@ deploy:
 	git add src
 	@read -p "Enter commit message: " message; \
 	git commit -m $$message
+	git push --tags
 	git push
 
 
