@@ -25,11 +25,17 @@ requirements: test_environment
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 
+## Install additional Python Dependencies
 devrequirements: requirements
 	$(PYTHON_INTERPRETER) -m pip install isort==5.10.1 pipreqs==0.4.11
 
+## Create datafolders
+datafolders:
+	mkdir -p data data/raw data/processed data/external data/interim
+
 ## Make Dataset
-data: requirements
+data: datafolders
+	$(PYTHON_INTERPRETER) src/data/download_data.py data/raw
 	$(PYTHON_INTERPRETER) src/data/make_dataset.py data/raw data/processed
 
 ## Delete all compiled Python files
