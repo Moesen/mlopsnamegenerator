@@ -38,6 +38,16 @@ clean:
 lint:
 	flake8 src
 
+deploy:
+	black src
+	isort src
+	pipreqs
+	git add src
+	@read -p "Enter commit message: " message; \
+	git commit -m $$message
+	git push
+
+
 ## Upload Data to S3
 sync_data_to_s3:
 ifeq (default,$(PROFILE))
