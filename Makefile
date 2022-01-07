@@ -1,4 +1,4 @@
-.PHONY: clean data lint requirements sync_data_to_s3 sync_data_from_s3
+.PHONY: clean data train lint requirements sync_data_to_s3 sync_data_from_s3
 
 #################################################################################
 # GLOBALS                                                                       #
@@ -46,6 +46,11 @@ clean:
 ## Lint using flake8
 lint:
 	flake8 src
+
+## Train using train_model in src/models
+train:
+	@read -p "Enter experiment name: " expName; \ 
+	$(PYTHON_INTERPRETER) .\src\models\train_model.py .\data\processed\train.csv .\models\$$expName --size 10
 
 deploy:
 	black src
