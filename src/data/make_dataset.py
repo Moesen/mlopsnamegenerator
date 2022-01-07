@@ -27,6 +27,7 @@ def main(input_filepath: click.Path, output_filepath: click.Path):
 
     df = pd.read_csv(f"{input_filepath}/raw_descriptions.csv")
     df["description"] = df.apply(clean_descriptions, axis=1)
+    df["name"] = df["name"].str.title()
 
     df = df.sample(frac=1, random_state=42)
 
