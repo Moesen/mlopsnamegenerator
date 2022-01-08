@@ -4,10 +4,12 @@ from pathlib import Path
 from typing import Callable, List
 
 import click
+import hydra
 import pandas as pd
 from architectures import SimpleGPT
 from datasets import Dataset, load_dataset
 from dotenv import find_dotenv, load_dotenv
+from hydra.utils import get_original_cwd
 from transformers import GPT2Tokenizer, Trainer, TrainingArguments
 
 
@@ -42,50 +44,37 @@ def get_tokenize_function(tokenizer: GPT2Tokenizer, separator: str, max_length: 
     return tokenize_function
 
 
-@click.command()
-@click.argument("data_folder", type=click.Path(exists=True))
-@click.argument("output_folder", type=click.Path())
-@click.option(
-    "--model", type=str, help="Model from the transformer package", default="gpt2"
-)
-@click.option("--sep", type=str, default=" = /@\ = ", help="Seperator if line too long")
-@click.option(
-    "--offset", type=int, default=15, help="Offset of accepted max length of sentence"
-)
-def main(
-    data_folder: str,
-    output_folder: str,
-    model: str,
-    sep: str,
-    offset: int,
-):
-    """Trains a given neural network on a given train file and
-    returns the pretrained model in a folder.
+@hydra.main(config_name="config.yaml", config_path=".")
+def main(cfg: dict):
+    """Trains a given neural network with the parameters from cfg
+    with the data from the data folder and saves the trained model
+    in the output folder.
 
     Args:
-        data_folder (str): Path to the data folder.
-            Must have 2.csv files called train.csv and val.csv
-        output_folder (str): Path to where the model is saved.
-            Please choose a not yet generated folder, as filenames are
-            non-configurable and will override previous models!
-        model (str): Name of model, go in and choose from available models on hugging face
-        sep (str): Separator
-        offset (int): The max additional space, a sentence can have,
-            than the longest sentence in given dataset
+        cfg (dict): configuration parameters for model and training
     Return:
         None
     """
+    model_config = cfg.configs.model
+    training_config = cfg.configs.training
 
-    batch_size = 16
-    lr = 5e-05
-    epochs = 3
-    max_steps = -1
-    seed = 42
+    # Model parameters
+    separator = model_config.sep
+    offset = model_config.offset
+
+    # Training parameters
+    data_folder = os.path.join(get_original_cwd(), training_config.data_folder)
+    output_folder = os.path.join(get_original_cwd(), training_config.output_folder)
+    model = training_config.model
+    batch_size = training_config.batch_size
+    lr = training_config.lr
+    epochs = training_config.epochs
+    max_steps = training_config.max_steps
+    seed = training_config.seed
 
     logging.info("Loading tokenizer")
     tokenizer = GPT2Tokenizer.from_pretrained(model)
     tokenizer.pad_token = tokenizer.eos_token
-    separator = sep
 
     logging.info("Loading Model")
     model = SimpleGPT.PokemonModel(
@@ -105,10 +94,8 @@ def main(
         dataset["train"]["description"] + dataset["validation"]["description"]
     )
     longest_description = max(len(x.split(" ")) for x in all_descriptions)
-    print(longest_description)
 
     max_length = longest_description + offset
-    print(max_length)
     token_function = get_tokenize_function(tokenizer, separator, max_length)
     tokenized_dataset = dataset.map(token_function, batched=True)
 
@@ -136,9 +123,6 @@ def main(
         save_strategy="epoch",
         evaluation_strategy="epoch",
     )
-
-    # To see what is going on
-    compute_metrics = lambda eval_pred: print(eval_pred)
 
     trainer = Trainer(
         model=model.model,
