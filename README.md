@@ -6,16 +6,40 @@ The goal of the project is to develop a model that is capable of creating Pokém
 The framework we use is [**Transformer**](https://github.com/huggingface/transformers). We intend to use the Natural Language Processing (NLP) part of the framework. The model we are going to use is [GPT-2](https://huggingface.co/gpt2?text=A+long+time+ago%2C+) doing finetuning over it so we can specialize it over our precise problem.
 
 ## Data
-Initially, we pretend to use the description of each Pokémon using the [PokéAPI](https://pokeapi.co/), which is a RESTful API linked to a database of 
+Initially, we pretend to use the description of each Pokémon using the [PokéAPI](https://pokeapi.co/), which is a RESTful API linked to a database of details of Pokémon.
+
+Relevant querys to the API:
+
+ - Obtain the list of all Pokémon:
+
+    ```
+    https://pokeapi.co/api/v2/pokedex/national
+    ```
+
+ - Get the description of each Pokémon:
+ 
+    ```
+    https://pokeapi.co/api/v2/pokemon-species/{PKMN_SPECIE_NUMBER}
+    ```
+
+## Commands
+
+ - `make requirements`: Install all requirements from `requirements.txt`.
+ - `make devrequirements`: Install additional dependencies for development.
+ - `make datafolders`: Create folders for the data in the project (`data/raw`, `data/processed`, `data/external` and `data/interim`)
+ - `make data`: Downloads and process the data.
+ - `make clean`: Delete compiled Python files
+ - `make train`: Train model
+ - `make deploy`: Upload the updates cleaning and fixing style
 
 
 ## RoadMap
 ### Week 1
-Goal of this week is to setup the project. This includes: Setting up the makefile, setting up the first model and a script for training the model, fetching the data required to train the models, setup hydra to test with hyperparameters and setup docker for containerisation.
+Goal of this week is to setup the project. This includes: Setting up the makefile, setting up the first model and a script for training the model, fetching the data required to train the models, setting up hydra to test with hyperparameters and setting up docker for containerization.
 
 |Alba|Alejandro|Gustav|
 |-|-|-|
-|t|t|t|
+|Data obtation and processing|Test usage of GPT-2|Develop model using GPT-2|
 
 ### Week 2
 
@@ -72,7 +96,14 @@ Goal of this week is to setup the project. This includes: Setting up the makefil
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 
 ## Cites and references
+[PokéAPI](https://pokeapi.co/)
+
 [Movie name generation with GPT-2](https://www.nbshare.io/notebook/976197999/Movie-Name-Generation-Using-GPT-2/)
+
+[Huggingface transformers](https://github.com/huggingface/transformers)
+
+[NameKrea An AI That Generates Domain Names](https://github.com/cderinbogaz/namekrea)
+
 
 --------
 <p><small>DTU Course 02476 - Machine Learning Operations</small></><br>
