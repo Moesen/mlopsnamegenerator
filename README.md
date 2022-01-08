@@ -102,6 +102,8 @@ Goal of this week is to setup the project. This includes: Setting up the makefil
 
 [Huggingface transformers](https://github.com/huggingface/transformers)
 
+[Huggingface notebooks](https://github.com/huggingface/notebooks/)
+
 [NameKrea An AI That Generates Domain Names](https://github.com/cderinbogaz/namekrea)
 
 

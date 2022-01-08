@@ -49,8 +49,8 @@ lint:
 
 ## Train using train_model in src/models
 train:
-	@read -p "Enter experiment name: " expName; \ 
-	$(PYTHON_INTERPRETER) .\src\models\train_model.py .\data\processed\train.csv .\models\$$expName --size 10
+	@read -p "Enter experiment name: " expName; \
+	$(PYTHON_INTERPRETER) src/models/train_model.py data/processed/ models/$$expName
 
 ## Upload the updates
 deploy: clean
