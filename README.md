@@ -24,13 +24,13 @@ Relevant querys to the API:
 
 ## Commands
 
- - `make requirements`: Install all requirements from `requirements.txt`.
- - `make devrequirements`: Install additional dependencies for development.
- - `make datafolders`: Create folders for the data in the project (`data/raw`, `data/processed`, `data/external` and `data/interim`)
+ - `make requirements`: Installs all requirements from `requirements.txt`.
+ - `make devrequirements`: Installs additional dependencies for development.
+ - `make datafolders`: Creates folders for the data in the project (`data/raw`, `data/processed`, `data/external` and `data/interim`)
  - `make data`: Downloads and process the data.
- - `make clean`: Delete compiled Python files
- - `make train`: Train model
- - `make deploy`: Upload the updates cleaning and fixing style
+ - `make clean`: Deletes compiled Python files
+ - `make train`: Trains model
+ - `make deploy`: Uploads the updates cleaning and fixing style
 
 
 ## RoadMap
@@ -39,7 +39,7 @@ Goal of this week is to setup the project. This includes: Setting up the makefil
 
 |Alba|Alejandro|Gustav|
 |-|-|-|
-|Data obtation and processing|Test usage of GPT-2|Develop model using GPT-2|
+|Data obtaining and processing|Test usage of GPT-2|Develop model using GPT-2|
 
 ### Week 2
 
