@@ -6,6 +6,7 @@ from typing import Callable, List
 import click
 import hydra
 import pandas as pd
+import wandb
 from architectures import SimpleGPT
 from datasets import Dataset, load_dataset
 from dotenv import find_dotenv, load_dotenv
@@ -72,6 +73,8 @@ def main(cfg: dict):
     max_steps = training_config.max_steps
     seed = training_config.seed
 
+    wandb.init(project="test-project", entity="mlopsnamegenerator")
+
     logging.info("Loading tokenizer")
     tokenizer = GPT2Tokenizer.from_pretrained(model)
     tokenizer.pad_token = tokenizer.eos_token
@@ -122,6 +125,7 @@ def main(cfg: dict):
         seed=seed,
         save_strategy="epoch",
         evaluation_strategy="epoch",
+        report_to="wandb",
     )
 
     trainer = Trainer(
