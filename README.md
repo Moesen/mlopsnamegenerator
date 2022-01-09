@@ -40,6 +40,7 @@ Goal of this week is to setup the project. This includes: Setting up the makefil
 |Alba|Alejandro|Gustav|
 |-|-|-|
 |Data obtaining and processing|Test usage of GPT-2|Develop model using GPT-2|
+|Hydra and config. files|Review and change structure of the train script| - |
 
 ### Week 2
 

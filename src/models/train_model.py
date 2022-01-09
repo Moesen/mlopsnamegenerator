@@ -1,11 +1,8 @@
 import logging
 import os
 from pathlib import Path
-from typing import Callable, List
 
-import click
 import hydra
-import pandas as pd
 from architectures import SimpleGPT
 from datasets import Dataset, load_dataset
 from dotenv import find_dotenv, load_dotenv
@@ -120,8 +117,9 @@ def main(cfg: dict):
         num_train_epochs=epochs,
         max_steps=max_steps,
         seed=seed,
-        save_strategy="epoch",
+        save_strategy="no",
         evaluation_strategy="epoch",
+        logging_strategy="epoch",
     )
 
     trainer = Trainer(
@@ -134,11 +132,25 @@ def main(cfg: dict):
     logging.info("Training")
     trainer.train()
 
+    logging.info("Finished training")
+
+    logging.info("Training info")
+
+    log_history = trainer.state.log_history
+
+    for log_train, log_val in zip(log_history[::2], log_history[1::2]):
+        logging.info(
+            f"Epoch: {int(log_train['epoch'])}\t"
+            + f"Training Loss: {log_train['loss']:.4f}\t"
+            + f"Validation Loss:{log_val['eval_loss']:.4f}"
+        )
+
+    logging.info("Saving model")
+    model.model.save_pretrained(output_folder)
+
 
 if __name__ == "__main__":
     log_fmt = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
     logging.basicConfig(level=logging.INFO, format=log_fmt)
 
-    project_dir = Path(__file__).resolve().parents[2]
-    load_dotenv(find_dotenv())
     main()
