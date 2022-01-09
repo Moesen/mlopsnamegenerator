@@ -63,7 +63,7 @@ def main(cfg: dict):
     # Training parameters
     data_folder = os.path.join(get_original_cwd(), training_config.data_folder)
     output_folder = os.path.join(get_original_cwd(), training_config.output_folder)
-    model = training_config.model
+    model_name = training_config.model
     batch_size = training_config.batch_size
     lr = training_config.lr
     epochs = training_config.epochs
@@ -73,12 +73,12 @@ def main(cfg: dict):
     wandb.init(project="test-project", entity="mlopsnamegenerator")
 
     logging.info("Loading tokenizer")
-    tokenizer = GPT2Tokenizer.from_pretrained(model)
+    tokenizer = GPT2Tokenizer.from_pretrained(model_name)
     tokenizer.pad_token = tokenizer.eos_token
 
     logging.info("Loading Model")
     model = SimpleGPT.PokemonModel(
-        transformers_model=model, eos_token_id=tokenizer.eos_token_id
+        transformers_model=model_name, eos_token_id=tokenizer.eos_token_id
     )
 
     logging.info("Loading Dataset")
@@ -101,7 +101,7 @@ def main(cfg: dict):
 
     train_dataset = (
         tokenized_dataset["train"]
-        .select(range(10))
+        .select(range(1000))
         .remove_columns(["name", "description", "entry_name"])
     )
 
