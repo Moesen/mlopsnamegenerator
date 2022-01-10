@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -18,7 +17,7 @@ jobs:
             path: ~/.cache/pip
           - os: macos-latest
             path: ~/Library/Caches/pip
-          - os: widows-latest
+          - os: windows-latest
             path: ~\AppData\Local\pip\Cache
 
     steps:

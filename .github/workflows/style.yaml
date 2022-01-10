@@ -18,7 +18,7 @@ jobs:
             path: ~/.cache/pip
           - os: macos-latest
             path: ~/Library/Caches/pip
-          - os: widows-latest
+          - os: windows-latest
             path: ~\AppData\Local\pip\Cache
 
     steps:
