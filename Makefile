@@ -60,8 +60,6 @@ predict:
 
 ## Upload the updates
 deploy: clean
-	black src
-	isort src
 	pipreqs --force
 	git add . 
 	@read -p "Enter commit message: " message; \

@@ -53,7 +53,6 @@ def main(config_file: click.Path, input_file: click.Path, output_file: click.Pat
     if input_file_extension == ".txt":
         with open(input_file, "r") as f:
             raw_input = f.read().split("\n")
-
     elif input_file_extension == ".csv":
         # Need to have 'description'
         raw_input = list(pd.read_csv(input_file)["description"])
