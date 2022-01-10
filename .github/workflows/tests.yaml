@@ -21,14 +21,6 @@ jobs:
           path: ~\AppData\Local\pip\Cache
 
     steps:
-    - name: Cache
-      - uses: actions/cache@v2
-        with:
-          path: ${{ matrix.path }}
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-
     - name: Checkout
       uses: actions/checkout@v2
     - name: Set up Python 3.8
