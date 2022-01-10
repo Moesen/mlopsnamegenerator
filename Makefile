@@ -50,7 +50,13 @@ lint:
 ## Train using train_model in src/models
 train:
 	@read -p "Enter experiment name: " expName; \
-	$(PYTHON_INTERPRETER) src/models/train_model.py data/processed/ models/$$expName
+	$(PYTHON_INTERPRETER) src/models/train_model.py configs=$$expName
+
+predict:
+	@read -p "Enter experiment name to use the configuration from: " expName; \
+	read -p "Enter input file: " inputF; \
+	read -p "Enter output file name: " outF; \
+	$(PYTHON_INTERPRETER) src/models/predict_model.py src/models/configs/$$expName.yaml src/models/predictions/$$inputF src/models/predictions/$$outF
 
 ## Upload the updates
 deploy: clean

@@ -101,7 +101,7 @@ def main(cfg: dict):
 
     train_dataset = (
         tokenized_dataset["train"]
-        .select(range(1000))
+        .select(range(100))
         .remove_columns(["name", "description", "entry_name"])
     )
 
