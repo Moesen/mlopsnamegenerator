@@ -1,9 +1,8 @@
 import logging
 import os
-from pathlib import Path
 
 from architectures import SimpleGPT
-from transformers import GPT2Tokenizer, Trainer, TrainingArguments
+from transformers import GPT2Tokenizer
 
 
 def main():
@@ -19,7 +18,7 @@ def main():
         transformers_model=model_name, eos_token_id=tokenizer.eos_token_id
     )
 
-    separator = " = /@\ = "
+    separator = r" = /@\ = "
 
     with open("src/models/predictions/input.txt", "r") as f:
         raw_input = f.read().split("\n")
