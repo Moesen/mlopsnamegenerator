@@ -27,7 +27,7 @@ requirements: test_environment
 
 ## Install additional Python Dependencies
 devrequirements: requirements
-	$(PYTHON_INTERPRETER) -m pip install isort==5.10.1 pipreqs==0.4.11
+	$(PYTHON_INTERPRETER) -m pip install isort==5.10.1 pipreqs==0.4.11 dvc==2.9.3 "dvc[gdrive]"
 
 ## Create datafolders
 datafolders:
