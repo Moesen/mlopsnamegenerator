@@ -25,9 +25,13 @@ requirements: test_environment
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 
+## Install test Python Dependencies
+testrequirements: requirements
+	$(PYTHON_INTERPRETER) -m pip install -r requirements_tests.txt
+
 ## Install additional Python Dependencies
-devrequirements: requirements
-	$(PYTHON_INTERPRETER) -m pip install isort==5.10.1 pipreqs==0.4.11 dvc==2.9.3 "dvc[gdrive]"
+devrequirements: testrequirements
+	$(PYTHON_INTERPRETER) -m pip install -r requirements_devel.txt
 
 ## Create datafolders
 datafolders:

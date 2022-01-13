@@ -2,4 +2,4 @@
     remote = storage
     autostage = true
 ['remote "storage"']
-    url = gdrive://1_qJepDXA9CSpT5pBLwzu7PMc1ZSzfClQ
+    url = gs://pokemon-data-models/

@@ -1,0 +1,4 @@
+isort==5.10.1 
+pipreqs==0.4.11 
+dvc==2.9.3 
+dvc[gs]
