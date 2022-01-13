@@ -119,10 +119,9 @@ def test_data_size():
     ), "The processed data size is not the same as the raw data"
 
 
-""" 
+"""
 IDEAS FOR MORE TESTS THAT WE FOUND THAT MAY NOT BE NECESSARY
- - Test that the shuffle is the same using the same seed.
-    Generating twice the data result in the same datasets
- - Everything went well withou errors
-
+- Test that the shuffle is the same using the same seed.
+Generating twice the data result in the same datasets
+- Everything went well withou errors
 """
