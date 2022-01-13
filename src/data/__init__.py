@@ -1,2 +1,4 @@
-from .download_data import *
-from .make_dataset import *
+import download_data
+import make_dataset
+
+__all__ = ["download_data", "make_dataset"]

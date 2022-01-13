@@ -11,6 +11,42 @@ from transformers import GPT2Tokenizer
 from src.models.architectures import SimpleGPT
 
 
+def load_input(input_file: click.Path(), separator: str):
+    """Accept either .txt with the description per line
+    or csv, with a column called 'description',
+    and returns the input
+
+    Args:
+        input_file (Path): Path to the input file
+        separator (str): Separator to add to the input
+
+    Returns:
+        A list with each line of the input as element,
+        with the separator and without it
+    """
+
+    logger = logging.getLogger(__name__)
+    logger.info("Reading config")
+
+    _, input_file_extension = os.path.splitext(input_file)
+
+    if input_file_extension == ".txt":
+        with open(input_file, "r") as f:
+            raw_input = f.read().split("\n")
+
+    elif input_file_extension == ".csv":
+        # Need to have 'description'
+
+        df_input = pd.read_csv(input_file)
+        if "description" not in df_input.columns:
+            logger.error("No 'description' column found in input file")
+            raise NameError("No 'description' column found in input file")
+
+        raw_input = list(df_input["description"])
+
+    return [x + separator for x in raw_input], raw_input
+
+
 @click.command()
 @click.argument("config_file", type=click.Path(exists=True))
 @click.argument("input_file", type=click.Path(exists=True))
@@ -37,8 +73,8 @@ def main(config_file: click.Path, input_file: click.Path, output_file: click.Pat
     tokenizer_model = config["training"]["model"]
     separator = config["model"]["sep"]
 
-    _, input_file_extension = os.path.splitext(input_file)
     _, output_file_extension = os.path.splitext(output_file)
+    _, input_file_extension = os.path.splitext(input_file)
 
     logger = logging.getLogger(__name__)
     logger.info("Reading config")
@@ -51,13 +87,15 @@ def main(config_file: click.Path, input_file: click.Path, output_file: click.Pat
     if not (input_file_extension == ".txt" or input_file_extension == ".csv"):
         logger.error("Invalid input file type")
         raise TypeError(
-            f"Invalid input file type. Got '{input_file_extension}', expected either '.csv' or '.txt'"
+            "Invalid input file type."
+            + f"Got '{input_file_extension}', expected either '.csv' or '.txt'"
         )
 
     if not (output_file_extension == ".txt" or output_file_extension == ".csv"):
         logger.warn("Invalid output file type. Output will not be saved")
         warnings.warn(
-            f"Invalid output file type. Output will not be saved. Got '{output_file_extension}', expected either '.csv' or '.txt'"
+            "Invalid output file type. Output will not be saved."
+            + f"Got '{output_file_extension}', expected either '.csv' or '.txt'"
         )
 
     logger.info("Loading tokenizer")
@@ -70,23 +108,7 @@ def main(config_file: click.Path, input_file: click.Path, output_file: click.Pat
         transformers_model=model_name, eos_token_id=tokenizer.eos_token_id
     )
 
-    # Accept either .txt with the description per line
-    # or csv, with a column called 'description'
-    if input_file_extension == ".txt":
-        with open(input_file, "r") as f:
-            raw_input = f.read().split("\n")
-
-    elif input_file_extension == ".csv":
-        # Need to have 'description'
-
-        df_input = pd.read_csv(input_file)
-        if "description" not in df_input.columns:
-            logger.error("No 'description' column found in input file")
-            raise NameError("No 'description' column found in input file")
-
-        raw_input = list(df_input["description"])
-
-    raw_input_sep = [x + separator for x in raw_input]
+    raw_input_sep, raw_input = load_input(input_file, separator)
 
     logger.info(f"Processing inputs from {input_file}")
     decoded_out = []
@@ -110,7 +132,7 @@ def main(config_file: click.Path, input_file: click.Path, output_file: click.Pat
             zip(raw_input, decoded_out), columns=["description", "name"]
         ).to_csv(output_file, index=False)
     else:
-        logger.info(f"Output:")
+        logger.info("Output:")
         for out in decoded_out:
             logger.info(f"\t{out}")
 

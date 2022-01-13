@@ -67,18 +67,20 @@ def test_create_output_txt():
         catch_exceptions=False,
     )
 
-    # Test output is created   
-    assert os.path.isfile("src/models/predictions/out.txt")
-    
+    # Test output is created
+    assert os.path.isfile("src/models/predictions/out.txt"), "Output not created"
+
     # Test output has as many lines as input
     with open("src/models/predictions/input.txt", "r") as in_f:
         in_num_lines = len(in_f.read().split("\n"))
-    
+
     with open("src/models/predictions/out.txt", "r") as out_f:
         out_num_lines = len(out_f.read().split("\n"))
-    
-    assert in_num_lines == out_num_lines
-    
+
+    assert (
+        in_num_lines == out_num_lines
+    ), "The size of the output differs from the input"
+
 
 @pytest.mark.skipif(not os.path.exists("models/exp1"), reason="Model files not found")
 def test_create_output_csv():
@@ -96,20 +98,19 @@ def test_create_output_csv():
         catch_exceptions=False,
     )
 
-    # Test output is created   
-    assert os.path.isfile("src/models/predictions/out.txt")
-    
+    # Test output is created
+    assert os.path.isfile("src/models/predictions/out.txt"), "Output not created"
+
     # Test output has as many lines as input
     with open("src/models/predictions/input.txt", "r") as in_f:
         input_content = in_f.read()
         in_num_lines = len(input_content.split("\n"))
-    
-    out_df = pd.read_csv("src/models/predictions/out.csv")    
-    
-    assert in_num_lines == len(out_df)
+
+    out_df = pd.read_csv("src/models/predictions/out.csv")
+
+    assert in_num_lines == len(out_df), "The size of the output differs from the input"
 
     # Test input row is equal to input
     out_text = "\n".join(out_df["description"].values)
 
-    assert out_text == input_content
-    
+    assert out_text == input_content, "Output has different content as input"

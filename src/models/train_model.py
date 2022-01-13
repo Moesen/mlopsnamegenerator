@@ -1,12 +1,10 @@
 import logging
 import os
-from pathlib import Path
 
 import hydra
 import wandb
 from architectures import SimpleGPT
 from datasets import Dataset, load_dataset
-from dotenv import find_dotenv, load_dotenv
 from hydra.utils import get_original_cwd
 from transformers import GPT2Tokenizer, Trainer, TrainingArguments
 

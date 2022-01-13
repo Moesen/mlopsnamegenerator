@@ -1,6 +1,4 @@
-from typing import Callable, List
-
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import DataLoader
 from transformers import GPT2LMHeadModel
 
 
