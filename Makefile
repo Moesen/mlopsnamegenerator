@@ -27,7 +27,7 @@ requirements: test_environment
 
 ## Install additional Python Dependencies
 devrequirements: requirements
-	$(PYTHON_INTERPRETER) -m pip install isort==5.10.1 pipreqs==0.4.11 pytest==6.2.5
+	$(PYTHON_INTERPRETER) -m pip install isort==5.10.1 pipreqs==0.4.11 dvc==2.9.3 "dvc[gdrive]" pytest==6.2.5
 
 ## Create datafolders
 datafolders:
@@ -63,8 +63,6 @@ test: devrequirements
 
 ## Upload the updates
 deploy: clean
-	black src
-	isort src
 	pipreqs --force
 	git add . 
 	@read -p "Enter commit message: " message; \
