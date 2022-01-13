@@ -1,12 +1,14 @@
 import logging
 import os
+import warnings
 
 import click
 import pandas as pd
 import yaml
-from architectures import SimpleGPT
 from tqdm import tqdm
 from transformers import GPT2Tokenizer
+
+from src.models.architectures import SimpleGPT
 
 
 @click.command()
@@ -27,9 +29,6 @@ def main(config_file: click.Path, input_file: click.Path, output_file: click.Pat
             not be saved and will give a WARNING to the user
     """
 
-    logger = logging.getLogger(__name__)
-    logger.info("Reading config")
-
     # Only accepts yaml as config file
     with open(config_file, "r") as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
@@ -38,31 +37,59 @@ def main(config_file: click.Path, input_file: click.Path, output_file: click.Pat
     tokenizer_model = config["training"]["model"]
     separator = config["model"]["sep"]
 
+    _, input_file_extension = os.path.splitext(input_file)
+    _, output_file_extension = os.path.splitext(output_file)
+
+    logger = logging.getLogger(__name__)
+    logger.info("Reading config")
+
+    # Check for bad files
+    if not os.path.isdir(model_name):
+        logger.error("No model found")
+        raise NameError(f"No model found at {model_name}")
+
+    if not (input_file_extension == ".txt" or input_file_extension == ".csv"):
+        logger.error("Invalid input file type")
+        raise TypeError(
+            f"Invalid input file type. Got '{input_file_extension}', expected either '.csv' or '.txt'"
+        )
+
+    if not (output_file_extension == ".txt" or output_file_extension == ".csv"):
+        logger.warn("Invalid output file type. Output will not be saved")
+        warnings.warn(
+            f"Invalid output file type. Output will not be saved. Got '{output_file_extension}', expected either '.csv' or '.txt'"
+        )
+
     logger.info("Loading tokenizer")
     tokenizer = GPT2Tokenizer.from_pretrained(tokenizer_model)
     tokenizer.pad_token = tokenizer.eos_token
 
     logger.info("Loading model")
+
     model = SimpleGPT.PokemonModel(
         transformers_model=model_name, eos_token_id=tokenizer.eos_token_id
     )
 
     # Accept either .txt with the description per line
-    # or csv, with a column called 'descrption'
-    _, input_file_extension = os.path.splitext(input_file)
+    # or csv, with a column called 'description'
     if input_file_extension == ".txt":
         with open(input_file, "r") as f:
             raw_input = f.read().split("\n")
 
     elif input_file_extension == ".csv":
         # Need to have 'description'
-        raw_input = list(pd.read_csv(input_file)["description"])
+
+        df_input = pd.read_csv(input_file)
+        if "description" not in df_input.columns:
+            logger.error("No 'description' column found in input file")
+            raise NameError("No 'description' column found in input file")
+
+        raw_input = list(df_input["description"])
 
     raw_input_sep = [x + separator for x in raw_input]
 
-    decoded_out = []
-
     logger.info(f"Processing inputs from {input_file}")
+    decoded_out = []
 
     for input in tqdm(raw_input_sep, desc="Processing inputs"):
 
@@ -72,19 +99,20 @@ def main(config_file: click.Path, input_file: click.Path, output_file: click.Pat
 
         decoded_out.append(decoded.split(separator)[-1])
 
-    _, output_file_extension = os.path.splitext(output_file)
-
-    logger.info(f"Saving output to {output_file}")
-
-    # Warn users if not using one of the two allowed extensions
     if output_file_extension == ".txt":
+        logger.info(f"Saving output to {output_file}")
         with open(output_file, "w") as f:
             f.write("\n".join(decoded_out))
 
     elif output_file_extension == ".csv":
+        logger.info(f"Saving output to {output_file}")
         pd.DataFrame(
             zip(raw_input, decoded_out), columns=["description", "name"]
         ).to_csv(output_file, index=False)
+    else:
+        logger.info(f"Output:")
+        for out in decoded_out:
+            logger.info(f"\t{out}")
 
 
 if __name__ == "__main__":

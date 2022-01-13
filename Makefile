@@ -27,7 +27,7 @@ requirements: test_environment
 
 ## Install additional Python Dependencies
 devrequirements: requirements
-	$(PYTHON_INTERPRETER) -m pip install isort==5.10.1 pipreqs==0.4.11 piptest==6.2.5
+	$(PYTHON_INTERPRETER) -m pip install isort==5.10.1 pipreqs==0.4.11 pytest==6.2.5
 
 ## Create datafolders
 datafolders:
@@ -57,6 +57,9 @@ predict:
 	read -p "Enter input file: " inputF; \
 	read -p "Enter output file name: " outF; \
 	$(PYTHON_INTERPRETER) src/models/predict_model.py src/models/configs/$$expName.yaml src/models/predictions/$$inputF src/models/predictions/$$outF
+
+test: devrequirements
+	pytest tests/
 
 ## Upload the updates
 deploy: clean
