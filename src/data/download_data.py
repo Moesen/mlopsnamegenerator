@@ -1,5 +1,6 @@
 import logging
 import os
+import warnings
 
 import click
 import pandas as pd
@@ -51,7 +52,8 @@ def main(output_folder: click.Path):
         df.to_csv(file_path, index=False)
 
     else:
-        logger.info("Data already downloaded")
+        logger.warning("Data already downloaded")
+        warnings.warn(UserWarning("Data already downloaded"))
 
 
 if __name__ == "__main__":
