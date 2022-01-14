@@ -48,6 +48,14 @@ Goal of this week is to setup the project. This includes: Setting up the makefil
 
 ### Week3
 
+### Docker commands
+Run train:
+ - `sudo docker build -f trainer.dockerfile . -t trainer:latest
+ - `sudo docker run --name $CONTAINERNAME -v $(pwd)/models/:/app/models/ trainer:latest`
+Run predict:
+ - `sudo docker build -f predict.dockerfile . -t predict:latest
+ - `sudo docker run --name $CONTAINERNAME `
+
 
 ## Project Organization
 
