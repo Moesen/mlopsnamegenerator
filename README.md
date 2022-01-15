@@ -35,7 +35,7 @@ Relevant querys to the API:
 
 ## RoadMap
 ### Week 1
-Goal of this week is to setup the project. This includes: Setting up the makefile, setting up the first model and a script for training the model, fetching the data required to train the models, setting up hydra to test with hyperparameters and setting up docker for containerization.
+The goal of this week is to setup the project. This includes: Setting up the makefile, setting up the first model and a script for training the model, fetching the data required to train the models, setting up hydra to test with hyperparameters and setting up docker for containerization.
 
 |Alba|Alejandro|Gustav|
 |-|-|-|
@@ -44,7 +44,13 @@ Goal of this week is to setup the project. This includes: Setting up the makefil
 |Add wandb to log training progress|Do predict script| Implement dvc with Google Drive |
 
 ### Week 2
+The goal of this week is to continue working on the project, implementing unit tests, continuous integration and use Google Cloud Platform (gcp).
 
+|Alba|Alejandro|Gustav|
+|-|-|-|
+| GitHub actions | Unit tests for data and model construction | |
+| Create gcp project | Changed prediction to generalize it |  |
+| Setup dvc in gcp storage | Calculate coverage ||
 
 ### Week3
 
@@ -59,16 +65,23 @@ Run predict:
 
 ## Project Organization
 
-
     ├── LICENSE
     ├── Makefile           <- Makefile with commands like `make data` or `make train`
     ├── README.md          <- The top-level README for developers using this project.
+    ├── .dvcignore
+    ├── .gitignore
     ├── data
     │   ├── external       <- Data from third party sources.
     │   ├── interim        <- Intermediate data that has been transformed.
     │   ├── processed      <- The final, canonical data sets for modeling.
+    │   |    ├── test.csv
+    │   |    ├── train.csv
+    │   |    └── val.csv
     │   └── raw            <- The original, immutable data dump.
+    │        └── raw_descriptions.csv
     │
+    ├── data.dvc
+    |
     ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
     │
     ├── models             <- Trained and serialized models, model predictions, or model summaries
@@ -76,32 +89,42 @@ Run predict:
     ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
     │                         the creator's initials, and a short `-` delimited description, e.g.
     │                         `1.0-jqp-initial-data-exploration`.
+    ├── outputs            <- Training outputs from hydra
     │
     ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
     │
     ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
     │   └── figures        <- Generated graphics and figures to be used in reporting
     │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
+    ├── requirements.txt   <- The requirements file for reproducing the analysis environment
+    ├── requirements_devel.txt <- The requirements file for the project development
+    ├── requirements_tests.txt <- The requirements file for testing the project
     │
     ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
     ├── src                <- Source code for use in this project.
     │   ├── __init__.py    <- Makes src a Python module
     │   │
     │   ├── data           <- Scripts to download or generate data
+    │   │   ├── download_data.py
     │   │   └── make_dataset.py
     │   │
     │   ├── features       <- Scripts to turn raw data into features for modeling
     │   │   └── build_features.py
     │   │
     │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │   │                 predictions
+    │   │   ├── architectures <- Model architectures
+    │   │   ├── configs       <- Yamls of experiments
+    │   │   ├── predictions   <- Input and output of predictions
+    │   │   ├── predict.yaml
     │   │   ├── predict_model.py
     │   │   └── train_model.py
     │   │
     │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
     │       └── visualize.py
+    ├── tests              <- Test of the project
+    │   ├── test_data.py
+    │   ├── test_model.py
+    │   └── test_predict.py         
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 
