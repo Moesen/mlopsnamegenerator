@@ -33,6 +33,16 @@ Relevant querys to the API:
  - `make deploy`: Uploads the updates cleaning and fixing style
 
 
+### Docker commands
+Run train:
+ - `sudo docker build -f trainer.dockerfile . -t trainer:latest`
+ - `sudo docker run --name $CONTAINERNAME -v $(pwd)/models/:/app/models/ trainer:latest`
+
+Run predict:
+ - `sudo docker build -f predict.dockerfile . -t predict:latest`
+ - `sudo docker run --name $CONTAINERNAME`
+
+
 ## RoadMap
 ### Week 1
 The goal of this week is to setup the project. This includes: Setting up the makefile, setting up the first model and a script for training the model, fetching the data required to train the models, setting up hydra to test with hyperparameters and setting up docker for containerization.
@@ -54,14 +64,6 @@ The goal of this week is to continue working on the project, implementing unit t
 
 ### Week3
 
-### Docker commands
-Run train:
- - `sudo docker build -f trainer.dockerfile . -t trainer:latest`
- - `sudo docker run --name $CONTAINERNAME -v $(pwd)/models/:/app/models/ trainer:latest`
-
-Run predict:
- - `sudo docker build -f predict.dockerfile . -t predict:latest`
- - `sudo docker run --name $CONTAINERNAME`
 
 
 ## Project Organization
