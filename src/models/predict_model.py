@@ -10,7 +10,6 @@ from transformers import GPT2Tokenizer
 
 from src.models.architectures import SimpleGPT
 
-
 def load_input(input_file: click.Path(), separator: str):
     """Accept either .txt with the description per line
     or csv, with a column called 'description',
@@ -120,6 +119,7 @@ def main(config_file: click.Path, input_file: click.Path, output_file: click.Pat
         decoded = tokenizer.decode(output[0], skip_special_tokens=True)
 
         decoded_out.append(decoded.split(separator)[-1])
+    
 
     if output_file_extension == ".txt":
         logger.info(f"Saving output to {output_file}")
