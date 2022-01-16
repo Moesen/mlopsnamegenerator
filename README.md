@@ -48,8 +48,8 @@ The goal of this week is to continue working on the project, implementing unit t
 
 |Alba|Alejandro|Gustav|
 |-|-|-|
-| GitHub actions | Unit tests for data and model construction | gcp docker images |
-| Create gcp project | Changed prediction to generalize it |  |
+| GitHub actions | Unit tests for data and model construction | GCP docker images |
+| Create gcp project | Changed prediction to generalize it | Parrallel data fetching |
 | Setup dvc in gcp storage | Calculate coverage ||
 
 ### Week3
