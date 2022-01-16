@@ -106,7 +106,9 @@ The goal of this week is to continue working on the project, implementing unit t
 #### S7 - Scalable applications 
 - [x] Distributed data loding
 - [ ] Distributed training
-- [ ] Scalable inference
+- [x] Scalable inference
+    - We decided to use `gpt2` instead of `gpt2-medium`, `gpt2-large` or `gpt2-xl`
+    - Possibility of using `fp16` for quantization in training
 
 #### S8 - Deployment 
 - [ ] Local deployment
