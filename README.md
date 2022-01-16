@@ -48,7 +48,7 @@ The goal of this week is to continue working on the project, implementing unit t
 
 |Alba|Alejandro|Gustav|
 |-|-|-|
-| GitHub actions | Unit tests for data and model construction | |
+| GitHub actions | Unit tests for data and model construction | gcp docker images |
 | Create gcp project | Changed prediction to generalize it |  |
 | Setup dvc in gcp storage | Calculate coverage ||
 
@@ -56,11 +56,12 @@ The goal of this week is to continue working on the project, implementing unit t
 
 ### Docker commands
 Run train:
- - `sudo docker build -f trainer.dockerfile . -t trainer:latest
+ - `sudo docker build -f trainer.dockerfile . -t trainer:latest`
  - `sudo docker run --name $CONTAINERNAME -v $(pwd)/models/:/app/models/ trainer:latest`
+
 Run predict:
- - `sudo docker build -f predict.dockerfile . -t predict:latest
- - `sudo docker run --name $CONTAINERNAME `
+ - `sudo docker build -f predict.dockerfile . -t predict:latest`
+ - `sudo docker run --name $CONTAINERNAME`
 
 
 ## Project Organization
