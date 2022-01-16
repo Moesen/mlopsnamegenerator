@@ -66,16 +66,55 @@ The goal of this week is to continue working on the project, implementing unit t
 
 ## Course Checklist
 
+#### S1 - Getting Started
+- [x] Conda
+    - Each member uses a `conda` environment 
+- [x] PyTorch
+    - The develop and training of the model is in `PyTorch`
 
-- [ ] Mercury
-- [x] Venus
-- [x] Earth (Orbit/Moon)
-- [x] Mars
-- [ ] Jupiter
-- [ ] Saturn
-- [ ] Uranus
-- [ ] Neptune
-- [ ] Comet Haley
+#### S2 - Organization and version control 
+- [x] Git
+    - Link to [GitHub repository](https://github.com/Moesen/mlopsnamegenerator)
+- [x] Code structure
+    - We use `cookie-cutter` basic structure
+- [x] Good coding practice
+    - We use docstrings in all our methods
+    - For styling we check `flake8` and use `black` and `isort`
+    - We use explicit typing in our methods definition
+- [x] Data Version Control 
+    - For our data, we use `dvc`
+
+#### S3 - Reproduceability 
+- [x] Docker
+- [x] Config files
+
+#### S4 - Debugging, profilling and logging 
+- [ ] Debugging
+- [ ] Profilling
+- [x] Experiment logging
+- [x] Minimizing boilerplate
+    - Using Huggingface Trainer API
+
+#### S5 - Continuous X 
+- [x] Continuous Integration
+- [ ] Continuous Machine Learning
+
+#### S6 - The cloud 
+- [x] Cloud setup
+- [x] Using the cloud
+
+#### S7 - Scalable applications 
+- [x] Distributed data loding
+- [ ] Distributed training
+- [ ] Scalable inference
+
+#### S8 - Deployment 
+- [ ] Local deployment
+- [ ] Cloud deployment
+- [ ] Data drifting
+
+#### S9 - Monitoring 
+- [ ] System monitoring
 
 
 ## Project Organization
