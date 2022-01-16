@@ -86,25 +86,35 @@ The goal of this week is to continue working on the project, implementing unit t
 
 #### S3 - Reproduceability 
 - [x] Docker
+    - We have a docker image for training and another for prediction
 - [x] Config files
+    - With `hydra` we load the configuration of the model with `.yaml` files
 
 #### S4 - Debugging, profilling and logging 
 - [ ] Debugging
+    - It was not needed to do a complex debugging
 - [ ] Profilling
+    - As we use pretrained models, and API for the training loop, we did not require any profilling tool
 - [x] Experiment logging
+    - Register each experiment with `wandb`. We also use `hydra` for this
 - [x] Minimizing boilerplate
-    - Using Huggingface Trainer API
+    - Using Huggingface Trainer API for `torch`
 
 #### S5 - Continuous X 
 - [x] Continuous Integration
+    - We set multiple unit tests with `pytest`
+    - We set two GitHub actions for styling and testing
 - [ ] Continuous Machine Learning
 
 #### S6 - The cloud 
 - [x] Cloud setup
+    - We created a Google Cloud shared project
 - [x] Using the cloud
+    - We created a data storage merged with `dvc`
 
 #### S7 - Scalable applications 
 - [x] Distributed data loding
+    - Parallel calls to the data API
 - [ ] Distributed training
 - [ ] Scalable inference
 
