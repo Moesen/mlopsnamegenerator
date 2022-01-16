@@ -1,5 +1,5 @@
 steps:
   - name: "gcr.io/cloud-builders/docker"
-    args: ["build", "-t", "europe-north1-a.pkg.dev/${PROJECT_ID}/docker-repo/trainer", "."]
+    args: ["build", "-t", "europe-north1-a.pkg.dev/${PROJECT_ID}/docker-repo/trainer", "-f", "trainer.dockerfile", "."]
   - name: "gcr.io/cloud-builders/docker"
     args: ['push', "europe-north1-a.pkg.dev/${PROJECT_ID}/docker-repo/trainer"]
