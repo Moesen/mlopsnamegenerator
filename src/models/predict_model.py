@@ -8,7 +8,7 @@ import yaml
 from tqdm import tqdm
 from transformers import GPT2Tokenizer
 
-from architectures import SimpleGPT
+from src.models.architectures import SimpleGPT
 
 def load_input(input_file: click.Path(), separator: str):
     """Accept either .txt with the description per line
