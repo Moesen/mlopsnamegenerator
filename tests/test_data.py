@@ -1,11 +1,12 @@
-import pytest
 import os
+
 import pandas as pd
+import pytest
 from click.testing import CliRunner
 
 from src.data.download_data import main as download_data
-from src.data.make_dataset import main as make_dataset
 from src.data.make_dataset import clean_descriptions
+from src.data.make_dataset import main as make_dataset
 
 
 @pytest.mark.skipif(not os.path.exists("data/raw"), reason="Data files not found")

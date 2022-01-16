@@ -1,10 +1,10 @@
-import pytest
 import os
 
-from click.testing import CliRunner
-from src.models.predict_model import main as predict_model
-
 import pandas as pd
+import pytest
+from click.testing import CliRunner
+
+from src.models.predict_model import main as predict_model
 
 
 def test_model_exist():

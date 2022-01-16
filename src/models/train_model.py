@@ -84,8 +84,7 @@ def main(cfg: dict):
     val_file = os.path.join(data_folder, "val.csv")
 
     dataset = load_dataset(
-        "csv",
-        data_files={"train": train_file, "validation": val_file},
+        "csv", data_files={"train": train_file, "validation": val_file},
     )
 
     all_descriptions = (
