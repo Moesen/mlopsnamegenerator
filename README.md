@@ -64,6 +64,18 @@ The goal of this week is to continue working on the project, implementing unit t
 
 ### Week3
 
+## Course Checklist
+
+
+- [ ] Mercury
+- [x] Venus
+- [x] Earth (Orbit/Moon)
+- [x] Mars
+- [ ] Jupiter
+- [ ] Saturn
+- [ ] Uranus
+- [ ] Neptune
+- [ ] Comet Haley
 
 
 ## Project Organization
