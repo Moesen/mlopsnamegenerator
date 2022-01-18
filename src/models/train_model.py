@@ -69,7 +69,7 @@ def main(cfg: dict):
     epochs = training_config.epochs
     max_steps = training_config.max_steps
     seed = training_config.seed
-    fp16 = training_config.fp16
+    fp16 = training_config.fp16 and torch.cuda.is_available()
 
     wandb.init(project="test-project", entity="mlopsnamegenerator")
 
@@ -113,36 +113,22 @@ def main(cfg: dict):
     )
 
     logging.info("Loading Trainer")
-    if torch.cuda.is_available() and fp16:
-        train_args = TrainingArguments(
-            output_dir=output_folder,
-            per_device_train_batch_size=batch_size,
-            per_device_eval_batch_size=batch_size,
-            learning_rate=lr,
-            num_train_epochs=epochs,
-            max_steps=max_steps,
-            seed=seed,
-            save_strategy="no",
-            evaluation_strategy="epoch",
-            logging_strategy="epoch",
-            report_to="wandb",
-            fp16=True,
-            fp16_full_eval=True,
-        )
-    else:
-        train_args = TrainingArguments(
-            output_dir=output_folder,
-            per_device_train_batch_size=batch_size,
-            per_device_eval_batch_size=batch_size,
-            learning_rate=lr,
-            num_train_epochs=epochs,
-            max_steps=max_steps,
-            seed=seed,
-            save_strategy="no",
-            evaluation_strategy="epoch",
-            logging_strategy="epoch",
-            report_to="wandb",
-        )
+    train_args = TrainingArguments(
+        output_dir=output_folder,
+        per_device_train_batch_size=batch_size,
+        per_device_eval_batch_size=batch_size,
+        learning_rate=lr,
+        num_train_epochs=epochs,
+        max_steps=max_steps,
+        seed=seed,
+        save_strategy="no",
+        evaluation_strategy="epoch",
+        logging_strategy="epoch",
+        report_to="wandb",
+        fp16=fp16,
+        fp16_full_eval=fp16,
+    )
+
 
     trainer = Trainer(
         model=model.model,

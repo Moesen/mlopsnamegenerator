@@ -11,3 +11,4 @@ training:
   epochs: 3
   max_steps: -1
   seed: 42
+  fp16: True

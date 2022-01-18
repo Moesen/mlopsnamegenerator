@@ -1,4 +1,3 @@
-from torch.utils.data import DataLoader
 from transformers import GPT2LMHeadModel
 
 
@@ -19,6 +18,3 @@ class PokemonModel:
         self.model = GPT2LMHeadModel.from_pretrained(
             transformers_model, pad_token_id=eos_token_id
         )
-
-    def train(self, dataset: DataLoader) -> int:
-        pass

@@ -1,0 +1,15 @@
+Name                                    Stmts   Miss  Cover
+-----------------------------------------------------------
+src/__init__.py                             0      0   100%
+src/data/__init__.py                        0      0   100%
+src/data/download_data.py                  50     39    22%
+src/data/make_dataset.py                   35      3    91%
+src/models/__init__.py                      0      0   100%
+src/models/architectures/SimpleGPT.py       4      3    25%
+src/models/predict_model.py                73     52    29%
+tests/__init__.py                           0      0   100%
+tests/test_data.py                         57     19    67%
+tests/test_model.py                         0      0   100%
+tests/test_predict.py                      45     29    36%
+-----------------------------------------------------------
+TOTAL                                     264    145    45%
