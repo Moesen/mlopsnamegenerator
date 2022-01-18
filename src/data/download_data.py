@@ -37,7 +37,7 @@ def download_species(queries: Tuple[int, str]) -> Union[list, dict]:
 @click.command()
 @click.argument("output_folder", type=click.Path())
 @click.option(
-    "--max_workers", type=int, default=4, help="Number of threads when downloading"
+    "--max_workers", type=int, default=32, help="Number of threads when downloading"
 )
 def main(output_folder: click.Path, max_workers: int):
     """Downloads the text descriptions from the PokeAPI and saves it in the
