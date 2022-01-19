@@ -65,6 +65,9 @@ predict:
 test: devrequirements
 	pytest tests/
 
+dockertrain:
+	sudo docker build -f trainer.dockerfile . -t trainer:latest
+
 ## Upload the updates
 deploy: clean
 	pipreqs --force
