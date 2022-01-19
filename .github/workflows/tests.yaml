@@ -41,11 +41,11 @@ jobs:
     - name: Create folders (Windows)
       run: |
         mkdir data data/raw data/processed data/external data/interimç
-      if: matrix.os == "windows-latest"
+      if: matrix.os == 'windows-latest'
     - name: Create folders (non-Windows)
       run: |
         mkdir -p data data/raw data/processed data/external data/interimç
-      if: matrix.os != "windows-latest"
+      if: matrix.os != 'windows-latest'
     - name: Download data
       run: |
         python src/data/download_data.py data/raw
