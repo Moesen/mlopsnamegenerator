@@ -1,5 +1,19 @@
 steps:
   - name: "gcr.io/cloud-builders/docker"
-    args: ["build", "-t", "europe-north1-a.pkg.dev/${PROJECT_ID}/docker-repo/trainer", "-f", "trainer.dockerfile", "."]
+    args: ["build", 
+          "-t", 
+          "europe-north1-a.pkg.dev/${PROJECT_ID}/docker-repo/trainer", 
+          "-f",
+          "trainer.dockerfile",
+          ".", 
+          "--build-arg",
+          "WANDB_TOKEN=$$WANDB_TOKEN"]
+    secretEnv: ["WANDB_TOKEN"]
   - name: "gcr.io/cloud-builders/docker"
     args: ['push', "europe-north1-a.pkg.dev/${PROJECT_ID}/docker-repo/trainer"]
+availableSecrets:
+  secretManager:
+    - versionName: projects/422063201452/secrets/WANDB_MOESEN_TOKEN/versions/1
+      env: "WANDB_TOKEN"
+options:
+  logging: CLOUD_LOGGING_ONLY

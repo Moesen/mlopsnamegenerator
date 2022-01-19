@@ -8,6 +8,8 @@ COPY requirements_devel.txt requirements_devel.txt
 COPY setup.py setup.py
 COPY src/ src/
 
+
+# Required for anibaliy/pytorch
 WORKDIR /app
 
 # Installing dependencies
