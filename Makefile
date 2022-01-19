@@ -66,7 +66,7 @@ test: devrequirements
 	pytest tests/
 
 dockertrainimg:
-	sudo docker build --build-arg WANDB_TOKEN=$(cat WANDB_API_TOKEN) -f trainer.dockerfile . -t trainer:latest
+	sudo docker build --build-arg WANDB_TOKEN="$(cat WANDB_API_TOKEN)" -f trainer.dockerfile . -t trainer:latest
 
 dockertrain:
 	@read -p "Container name: " containerName; \
