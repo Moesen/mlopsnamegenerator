@@ -40,11 +40,11 @@ jobs:
         pip install -r requirements_tests.txt
     - name: Create folders (Windows)
       run: |
-        mkdir data data\raw data\processed data\external data\interimç
+        mkdir data, data\raw, data\processed, data\external, data\interim
       if: matrix.os == 'windows-latest'
     - name: Create folders (non-Windows)
       run: |
-        mkdir -p data data/raw data/processed data/external data/interimç
+        mkdir -p data data/raw data/processed data/external data/interim
       if: matrix.os != 'windows-latest'
     - name: Download data
       run: |
