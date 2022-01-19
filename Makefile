@@ -66,11 +66,12 @@ test: devrequirements data
 	pytest tests/
 
 dockertrainimg:
-	sudo docker build -f trainer.dockerfile . -t trainer:latest --build-arg WANDB_TOKEN=$(shell cat WANDB_API_TOKEN)
+	sudo docker build --build-arg WANDB_TOKEN=$(shell cat WANDB_API_TOKEN) -f trainer.dockerfile . -t trainer:latest
 
 dockertrain:
 	@read -p "Container name: " containerName; \
-	sudo docker run --name $$containerName -v $(pwd)/models:/models trainer:latest
+	read -p "Enter experiment name: " expname; \
+	sudo docker run --name $$containerName --user="$(id -u):$(id -g)" -v $(shell pwd)/models:/app/models/ trainer:latest configs=$$expName
 
 cleancontainers:
 	sudo docker ps -a

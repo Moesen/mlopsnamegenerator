@@ -1,6 +1,6 @@
 model:
   sep: " = /@\ = " 
-  offset: 15
+  offset: 30
 
 training:
   data_folder: data/processed/

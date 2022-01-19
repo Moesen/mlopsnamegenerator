@@ -10,7 +10,6 @@ from transformers import GPT2Tokenizer, Trainer, TrainingArguments
 
 import torch
 
-
 def get_tokenize_function(tokenizer: GPT2Tokenizer, separator: str, max_length: int):
     """Function used when mapping dataset with a certain tokenization.
 

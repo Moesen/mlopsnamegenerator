@@ -8,6 +8,7 @@ COPY requirements_devel.txt requirements_devel.txt
 COPY setup.py setup.py
 COPY src/ src/
 
+
 # Required for anibaliy/pytorch
 WORKDIR /app
 
@@ -16,7 +17,7 @@ RUN pip install -r requirements.txt
 RUN pip install -r requirements_devel.txt
 
 ARG WANDB_TOKEN
-ENV "WANDB_API_KEY" $WANDB_TOKEN
+ENV WANDB_API_KEY $WANDB_TOKEN
 
 # Download data
 RUN mkdir raw_data
