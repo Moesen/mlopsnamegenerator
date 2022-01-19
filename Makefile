@@ -62,7 +62,7 @@ predict:
 	read -p "Enter output file name: " outF; \
 	$(PYTHON_INTERPRETER) src/models/predict_model.py src/models/configs/$$expName.yaml src/models/predictions/$$inputF src/models/predictions/$$outF
 
-test: devrequirements
+test: devrequirements data
 	pytest tests/
 
 ## Upload the updates
