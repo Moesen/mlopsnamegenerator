@@ -6,7 +6,7 @@ steps:
     args: ['push', "europe-north1-a.pkg.dev/${PROJECT_ID}/docker-repo/trainer"]
 availableSecrets:
   secretManager:
-    - versionName: projects/422063201452/secrets/WANDB_MOESEN_TOKEN
+    - versionName: projects/422063201452/secrets/WANDB_MOESEN_TOKEN/versions/1
       env: "WANDB_TOKEN"
 options:
   logging: CLOUD_LOGGING_ONLY
