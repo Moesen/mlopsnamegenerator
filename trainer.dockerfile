@@ -12,9 +12,13 @@ COPY src/ src/
 RUN pip install -r requirements.txt
 RUN pip install -r requirements_devel.txt
 
+ARG WANDB_TOKEN=default
+RUN echo "$(WANDB_TOKEN)"
+ENV "WANDB_API_KEY"=WANDB_TOKEN
+
 # Download data
 RUN mkdir raw_data
-RUN python src/data/dowload_data.py raw_data
+RUN python src/data/download_data.py raw_data
 
 RUN mkdir -p data/processed
 RUN python src/data/make_dataset.py raw_data data/processed

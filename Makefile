@@ -65,8 +65,17 @@ predict:
 test: devrequirements
 	pytest tests/
 
+dockertrainimg:
+	sudo docker build --build-arg WANDB_TOKEN=$(cat WANDB_API_TOKEN) -f trainer.dockerfile . -t trainer:latest
+
 dockertrain:
-	sudo docker build -f trainer.dockerfile . -t trainer:latest
+	@read -p "Container name: " containerName; \
+	sudo docker run --name containerName -v $(pwd)/models:/app/models/ trainer:latest
+
+cleancontainers:
+	sudo docker ps -a
+	sudo docker ps -aq | xargs sudo docker stop
+	sudo docker ps -aq | xargs sudo docker rm
 
 ## Upload the updates
 deploy: clean

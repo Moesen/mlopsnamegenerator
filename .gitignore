@@ -5,7 +5,9 @@ __pycache__/
 # C extensions
 *.so
 
+# Tokens
 **/KEY_FILE_CONTENT*
+*TOKEN*
 
 # Distribution / packaging
 .Python
