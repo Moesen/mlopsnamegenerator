@@ -91,7 +91,7 @@ def main(config_file: click.Path, input_file: click.Path, output_file: click.Pat
         )
 
     if not (output_file_extension == ".txt" or output_file_extension == ".csv"):
-        logger.warn("Invalid output file type. Output will not be saved")
+        logger.warning("Invalid output file type. Output will not be saved")
         warnings.warn(
             "Invalid output file type. Output will not be saved."
             + f"Got '{output_file_extension}', expected either '.csv' or '.txt'"
@@ -115,7 +115,7 @@ def main(config_file: click.Path, input_file: click.Path, output_file: click.Pat
     for input in tqdm(raw_input_sep, desc="Processing inputs"):
 
         encoded = tokenizer.encode(input, return_tensors="pt")
-        output = model.model.generate(encoded, max_length=len(encoded[0]) + 10)
+        output = model.model.generate(encoded, max_length=len(encoded[0]) + 15)
         decoded = tokenizer.decode(output[0], skip_special_tokens=True)
 
         decoded_out.append(decoded.split(separator)[-1])

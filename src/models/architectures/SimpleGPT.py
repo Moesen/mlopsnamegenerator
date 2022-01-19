@@ -16,5 +16,5 @@ class PokemonModel:
             tokenizer (tokenizer): The token of the tokenizer
         """
         self.model = GPT2LMHeadModel.from_pretrained(
-            transformers_model, pad_token_id=eos_token_id
+            transformers_model, pad_token_id=eos_token_id, torchscript=True
         )

@@ -4,3 +4,6 @@ dvc==2.9.3
 dvc[gs]
 black
 wandb
+torch-model-archiver==0.5.2
+torch-workflow-archiver==0.2.2
+torchserve==0.5.2
