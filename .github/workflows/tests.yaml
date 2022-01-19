@@ -38,6 +38,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install -r requirements_tests.txt
+    - name: Create folders
+      run: |
+        mkdir -p data data/raw data/processed data/external data/interim
+    - name: Download data
+      run: |
+        python src/data/download_data.py data/raw
+        python src/data/make_dataset.py data/raw data/processed
     - name: Test with pytest
       run: |
         pip install pytest
