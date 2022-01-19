@@ -1,5 +1,6 @@
 steps:
   - name: "gcr.io/cloud-builders/docker"
-    args: ["build", "-t", "europe-north1-a.pkg.dev/${PROJECT_ID}/docker-repo/trainer", "-f", "trainer.dockerfile", "."]
+    args: ["build", "-t", "europe-north1-a.pkg.dev/${PROJECT_ID}/docker-repo/trainer", "-f trainer.dockerfile .", "--build-arg WANDB_TOKEN=$$WANDB_MOESEN_TOKEN"]
+    secretEnv: ["WANDB_MOESEN_TOKEN"]
   - name: "gcr.io/cloud-builders/docker"
     args: ['push', "europe-north1-a.pkg.dev/${PROJECT_ID}/docker-repo/trainer"]

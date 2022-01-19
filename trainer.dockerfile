@@ -13,8 +13,9 @@ RUN pip install -r requirements.txt
 RUN pip install -r requirements_devel.txt
 
 ARG WANDB_TOKEN
-ENV "WANDB_API_KEY"=WANDB_TOKEN
-RUN echo "$(WANDB_TOKEN)"
+ENV "WANDB_API_KEY" $WANDB_TOKEN
+
+ENV "WANDB_TOKEN_TEST" "da51b3872cd922fa6f4b318d5ea65ae9261f4a7f"
 
 # Download data
 RUN mkdir raw_data
@@ -25,4 +26,4 @@ RUN python src/data/make_dataset.py raw_data data/processed
 RUN rm -rf raw_data
 
 # Command run when doing docker run
-ENTRYPOINT [ "python", "-u", "src/models/train_model.py" ]
+# ENTRYPOINT [ "python", "-u", "src/models/train_model.py" ]
