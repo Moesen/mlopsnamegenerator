@@ -1,5 +1,6 @@
 # FROM google/cloud-sdk:alpine as gcloud
 FROM anibali/pytorch:1.8.1-cuda11.1-ubuntu20.04
+WORKDIR /app
 
 # Copying files to files
 COPY requirements.txt requirements.txt
@@ -13,8 +14,7 @@ RUN pip install -r requirements.txt
 RUN pip install -r requirements_devel.txt
 
 ARG WANDB_TOKEN
-ENV "WANDB_API_KEY"=WANDB_TOKEN
-RUN echo "$(WANDB_TOKEN)"
+ENV WANDB_API_KEY $WANDB_TOKEN
 
 # Download data
 RUN mkdir raw_data
