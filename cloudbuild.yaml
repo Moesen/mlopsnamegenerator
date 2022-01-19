@@ -4,3 +4,5 @@ steps:
     # secretEnv: ["WANDB_MOESEN_TOKEN"]
   - name: "gcr.io/cloud-builders/docker"
     args: ['push', "europe-north1-a.pkg.dev/${PROJECT_ID}/docker-repo/trainer"]
+options:
+ logging: CLOUD_LOGGING_ONLY
