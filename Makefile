@@ -65,6 +65,18 @@ predict:
 test: devrequirements data
 	pytest tests/
 
+dockertrainimg:
+	sudo docker build -f trainer.dockerfile . -t trainer:latest --build-arg WANDB_TOKEN=$(cat WANDB_API_TOKEN)
+
+dockertrain:
+	@read -p "Container name: " containerName; \
+	sudo docker run --name $$containerName -v $(pwd)/models:/app/models/ trainer:latest
+
+cleancontainers:
+	sudo docker ps -a
+	sudo docker ps -aq | xargs sudo docker stop
+	sudo docker ps -aq | xargs sudo docker rm
+
 ## Upload the updates
 deploy: clean
 	pipreqs --force

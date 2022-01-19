@@ -3,3 +3,4 @@ pipreqs==0.4.11
 dvc==2.9.3 
 dvc[gs]
 black
+wandb

@@ -13,8 +13,7 @@ WORKDIR /app
 # Installing dependencies
 RUN pip install -r requirements.txt
 
-# Environment variable for wandb
-ENV "WANDB_API_KEY" "3e2d878ba2fb140799e656b41f70fd79182cf284"
+
 
 # Command run when doing docker run
 ENTRYPOINT [ "python", "-u", "src/models/predict_models.py"]

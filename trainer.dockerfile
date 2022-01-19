@@ -1,24 +1,29 @@
-# cuda enabled python image
+# FROM google/cloud-sdk:alpine as gcloud
 FROM anibali/pytorch:1.8.1-cuda11.1-ubuntu20.04
 
 # Copying files to files
 COPY requirements.txt requirements.txt
 COPY requirements_devel.txt requirements_devel.txt
-COPY .dvc/ .dvc/
-COPY data.dvc data.dvc
 
 COPY setup.py setup.py
 COPY src/ src/
-
-# Changing workdir to /app as that is expected in the anibali image
-WORKDIR /app
 
 # Installing dependencies
 RUN pip install -r requirements.txt
 RUN pip install -r requirements_devel.txt
 
-# Downloading data and 
-RUN dvc pull
+ARG WANDB_TOKEN
+ENV "WANDB_API_KEY" $WANDB_TOKEN
+
+ENV "WANDB_TOKEN_TEST" "da51b3872cd922fa6f4b318d5ea65ae9261f4a7f"
+
+# Download data
+RUN mkdir raw_data
+RUN python src/data/download_data.py raw_data
+
+RUN mkdir -p data/processed
+RUN python src/data/make_dataset.py raw_data data/processed
+RUN rm -rf raw_data
 
 # Command run when doing docker run
-ENTRYPOINT [ "python", "-u", "src/models/train_model.py" ]
+# ENTRYPOINT [ "python", "-u", "src/models/train_model.py" ]
