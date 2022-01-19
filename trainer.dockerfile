@@ -1,6 +1,5 @@
 # FROM google/cloud-sdk:alpine as gcloud
 FROM anibali/pytorch:1.8.1-cuda11.1-ubuntu20.04
-WORKDIR /app
 
 # Copying files to files
 COPY requirements.txt requirements.txt
@@ -8,6 +7,8 @@ COPY requirements_devel.txt requirements_devel.txt
 
 COPY setup.py setup.py
 COPY src/ src/
+
+WORKDIR /app
 
 # Installing dependencies
 RUN pip install -r requirements.txt
