@@ -71,7 +71,7 @@ dockertrainimg:
 dockertrain:
 	@read -p "Container name: " containerName; \
 	read -p "Enter experiment name: " expname; \
-	sudo docker run --name $$containerName --user="$(id -u):$(id -g)" -v $(shell pwd)/models:/app/models/ trainer:latest configs=$$expName
+	sudo docker run --name $$containerName --user="$(id -u):$(id -g)" -v $(shell pwd)/models:/app/models/ -v $(shell pwd)/outputs:/app/outputs/ trainer:latest configs=$$expName
 
 cleancontainers:
 	sudo docker ps -a
