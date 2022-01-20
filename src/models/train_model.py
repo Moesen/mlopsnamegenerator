@@ -70,7 +70,7 @@ def main(cfg: dict):
     seed = training_config.seed
     fp16 = training_config.fp16 and torch.cuda.is_available()
 
-    wandb.init(project="test-project", entity="mlopsnamegenerator")
+    wandb.init(project="PKMN-name-generator", entity="mlopsnamegenerator")
 
     logging.info("Loading tokenizer")
     tokenizer = GPT2Tokenizer.from_pretrained(model_name)
@@ -101,13 +101,11 @@ def main(cfg: dict):
 
     train_dataset = (
         tokenized_dataset["train"]
-        .select(range(100))
         .remove_columns(["name", "description", "entry_name"])
     )
 
     val_dataset = (
         tokenized_dataset["validation"]
-        .select(range(10))
         .remove_columns(["name", "description", "entry_name"])
     )
 
