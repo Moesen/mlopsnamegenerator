@@ -6,6 +6,8 @@ USER root
 RUN printf "\nservice_envelope=json" >> /home/model-server/config.properties
 USER model-server
 
+RUN pip install transformers
+
 RUN torch-model-archiver --model-name deployed_model \
     --version 0.1 \
     --serialized-file /home/model-server/pytorch_model.bin \
@@ -13,8 +15,5 @@ RUN torch-model-archiver --model-name deployed_model \
     --handler /home/model-server/model_handler.py \
     --extra-files /home/model-server/config.json
 
-CMD ["torchserve", \
-     "--start" \
-     "--ts-config=/home/model-server/config.properties", \
-     "--model", \
-     "deployed_model=deployed_model.mar"]
+
+CMD ["torchserve", "--start", "--ts-config=/home/model-server/config.properties", "--models", "deployed_model=deployed_model.mar"]

@@ -1,10 +1,6 @@
 from ts.torch_handler.base_handler import BaseHandler
-from transformers import GPT2Tokenizer
-import os
-import pandas as pd
+from transformers import GPT2Tokenizer, GPT2LMHeadModel
 import torch
-
-from src.models.architectures import SimpleGPT
 
 class ModelHandler(BaseHandler):
     """
@@ -27,9 +23,9 @@ class ModelHandler(BaseHandler):
         model_dir = properties.get("model_dir")
         self.device = torch.device("cuda:" + str(properties.get("gpu_id")) if torch.cuda.is_available() else "cpu")
 
-        self.model = SimpleGPT.PokemonModel(
-            transformers_model=model_dir, eos_token_id=self.tokenizer.eos_token_id
-        ).model
+        self.model = GPT2LMHeadModel.from_pretrained(
+            model_dir, pad_token_id=self.tokenizer.eos_token_id
+        )
 
         self.model.to(self.device)
         self.model.eval()
