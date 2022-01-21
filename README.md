@@ -68,7 +68,7 @@ The goal of this week is to deploy the model and prepare the hand in of the proj
 
 |Alba|Alejandro|Gustav|
 |-|-|-|
-| Deploy model locally with Torchserve | Deploy model using gcp functions | |
+| Deploy model locally with Torchserve | Deploy model using gcp functions | Build trainer container with gcp using Cloud Build Triggers|
 | Work on the presentation | Work on the presentation | Work on the presentation |
 
 ## Course Checklist
