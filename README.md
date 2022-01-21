@@ -31,6 +31,7 @@ Relevant querys to the API:
  - `make clean`: Deletes compiled Python files
  - `make train`: Trains model
  - `make deploy`: Uploads the updates cleaning and fixing style
+ - `make pickle`: Pickle a model and a tokenizer
 
 
 ### Docker commands
@@ -59,10 +60,16 @@ The goal of this week is to continue working on the project, implementing unit t
 |Alba|Alejandro|Gustav|
 |-|-|-|
 | GitHub actions | Unit tests for data and model construction | GCP docker images |
-| Create gcp project | Changed prediction to generalize it | Parrallel data fetching |
-| Setup dvc in gcp storage | Calculate coverage ||
+| Create gcp project | Changed prediction to generalize it | Parallel data fetching |
+| Setup dvc in gcp storage | Calculate coverage | |
 
 ### Week3
+The goal of this week is to deploy the model and prepare the hand in of the project.
+
+|Alba|Alejandro|Gustav|
+|-|-|-|
+| Deploy model locally with Torchserve | Deploy model using gcp functions | Build trainer container with gcp using Cloud Build Triggers|
+| Work on the presentation | Work on the presentation | Work on the presentation |
 
 ## Course Checklist
 
@@ -121,8 +128,10 @@ The goal of this week is to continue working on the project, implementing unit t
     - Possibility of using `fp16` for quantization in training
 
 #### S8 - Deployment 
-- [ ] Local deployment
-- [ ] Cloud deployment
+- [x] Local deployment
+    - Model deployed with custom handler in Torchserve
+- [x] Cloud deployment
+    - Model deployed with Google Cloud Functions
 - [ ] Data drifting
 
 #### S9 - Monitoring 
