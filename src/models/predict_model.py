@@ -91,7 +91,7 @@ def main(config_file: click.Path, input_file: click.Path, output_file: click.Pat
         )
 
     if not (output_file_extension == ".txt" or output_file_extension == ".csv"):
-        logger.warn("Invalid output file type. Output will not be saved")
+        logger.warning("Invalid output file type. Output will not be saved")
         warnings.warn(
             "Invalid output file type. Output will not be saved."
             + f"Got '{output_file_extension}', expected either '.csv' or '.txt'"
@@ -118,7 +118,9 @@ def main(config_file: click.Path, input_file: click.Path, output_file: click.Pat
         output = model.model.generate(encoded, max_length=len(encoded[0]) + 10)
         decoded = tokenizer.decode(output[0], skip_special_tokens=True)
 
-        decoded_out.append(decoded.split(separator)[-1])
+        processed = decoded.split(separator)[-1]
+        
+        decoded_out.append("".join(x for x in processed if x.isalpha()))
     
 
     if output_file_extension == ".txt":

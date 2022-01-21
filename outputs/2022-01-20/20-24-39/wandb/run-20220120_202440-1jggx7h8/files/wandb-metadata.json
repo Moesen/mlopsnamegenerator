@@ -1,0 +1,25 @@
+{
+    "os": "Linux-5.13.0-27-generic-x86_64-with-glibc2.17",
+    "python": "3.8.12",
+    "heartbeatAt": "2022-01-20T19:24:41.072842",
+    "startedAt": "2022-01-20T19:24:40.141812",
+    "docker": null,
+    "gpu": "NVIDIA GeForce GTX 1650 Ti",
+    "gpu_count": 1,
+    "cpu_count": 16,
+    "cuda": null,
+    "args": [
+        "configs=exp2"
+    ],
+    "state": "running",
+    "program": "src/models/train_model.py",
+    "git": {
+        "remote": "https://github.com/Moesen/mlopsnamegenerator.git",
+        "commit": "b764ac1bc671270cf0dbf32eee4009b9becd1953"
+    },
+    "email": "pheithar@hotmail.com",
+    "root": "/home/pheithar/Universidad/MLOps/mlopsnamegenerator",
+    "host": "pheithar-laptop",
+    "username": "pheithar",
+    "executable": "/home/pheithar/anaconda3/envs/ProjectMLOps/bin/python3"
+}

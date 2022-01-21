@@ -1,0 +1,14 @@
+configs:
+  model:
+    sep: ' --> '
+    offset: 30
+  training:
+    data_folder: data/processed/
+    output_folder: models/exp2
+    model: gpt2
+    batch_size: 64
+    lr: 0.0001
+    epochs: 5
+    max_steps: -1
+    seed: 42
+    fp16: true

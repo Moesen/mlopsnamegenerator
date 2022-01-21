@@ -1,13 +1,13 @@
 model:
-  sep: " = /@\ = " 
-  offset: 15
+  sep: " --> " 
+  offset: 30
 
 training:
   data_folder: data/processed/
   output_folder: models/exp2
   model: gpt2
   batch_size: 16
-  lr: 5e-05
+  lr: 1e-04
   epochs: 3
   max_steps: -1
   seed: 42

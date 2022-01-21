@@ -62,6 +62,11 @@ predict:
 	read -p "Enter output file name: " outF; \
 	$(PYTHON_INTERPRETER) src/models/predict_model.py src/models/configs/$$expName.yaml src/models/predictions/$$inputF src/models/predictions/$$outF
 
+pickle:
+	mkdir -p models/pickle
+	@read -p "Enter model name to pickle: " expName; \
+	$(PYTHON_INTERPRETER) src/models/pickle_model.py src/models/configs/$$expName.yaml models/pickle/model.pkl models/pickle/tokenizer.pkl
+
 test: devrequirements data
 	pytest tests/
 
